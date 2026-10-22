@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1306222c2e186b84ca637612352f94e7, type: 3}
+  m_Name: WeaponData_rapier
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  <Name>k__BackingField: Rapier
+  <GroundPrefab>k__BackingField: {fileID: 0}
+  <Description>k__BackingField: 
+  <WearableElements>k__BackingField:
+  - <Prefab>k__BackingField: {fileID: 2889888828281465837, guid: 4ffa8451e2f1ef24082e670c719dc89f, type: 3}
+    <Positions>k__BackingField:
+    - <PropType>k__BackingField: 1
+      <Position>k__BackingField: {x: 0, y: 0, z: 0}
+      <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+      <Scale>k__BackingField: 1
+    - <PropType>k__BackingField: 0
+      <Position>k__BackingField: {x: 0, y: 0, z: 0}
+      <Rotation>k__BackingField: {x: 0, y: -180, z: 0}
+      <Scale>k__BackingField: 1
+    - <PropType>k__BackingField: 1
+      <Position>k__BackingField: {x: 0, y: 0.13, z: 0}
+      <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+      <Scale>k__BackingField: 1
