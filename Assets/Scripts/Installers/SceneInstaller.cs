@@ -19,6 +19,12 @@ public class SceneInstaller : MonoInstaller
             .NonLazy();
         
         Container
+            .Bind<DamageMonitor>()
+            .FromComponentInNewPrefabResource("Utility/DamageMonitor")
+            .AsSingle()
+            .NonLazy();
+        
+        Container
             .BindInterfacesAndSelfTo<CharacterInputHandler>()
             .AsSingle()
             .NonLazy();

@@ -4,6 +4,7 @@ public class WeaponInstance : WearableItemInstance
 {
     private readonly AudioSource _weaponAudioSource;
     private readonly WeaponData _weaponData;
+    private readonly WeaponDamagePoints _weaponDamagePoints;
     
     public WeaponInstance(PropBones propBones, WeaponData data)
         : base(propBones, data)
@@ -14,7 +15,24 @@ public class WeaponInstance : WearableItemInstance
         {
             _weaponAudioSource = Instances[0].AddComponent<AudioSource>();
             _weaponAudioSource.playOnAwake = false;
+
+            Instances[0].TryGetComponent(out _weaponDamagePoints);
+
+            if (!_weaponDamagePoints)
+            {
+                Debug.LogWarning("No damage points script on weapon instance!");
+            }
         }
+    }
+
+    public void BeginAttack()
+    {
+        _weaponDamagePoints?.BeginAttack();
+    }
+
+    public void EndAttack()
+    {
+        _weaponDamagePoints?.EndAttack();
     }
 
     public void PlaySwitchPositionSound()

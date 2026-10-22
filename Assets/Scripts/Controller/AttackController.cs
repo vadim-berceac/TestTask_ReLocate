@@ -33,4 +33,14 @@ public class AttackController : MonoBehaviour
    {
       _weapon?.PlayRandomSwingSound();
    }
+
+   public void BeginAttack()
+   {
+      _weapon?.BeginAttack();
+   }
+
+   public void EndAttack()
+   {
+      _weapon?.EndAttack();
+   }
 }

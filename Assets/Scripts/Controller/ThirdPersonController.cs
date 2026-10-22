@@ -73,6 +73,14 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
         
+        [Header("Attack Rotation")]
+        [Tooltip("Во сколько раз медленнее поворачиваемся во время атаки (1 = как обычно)")]
+        [Range(1f, 20f)]
+        public float AttackRotationSlowdown = 6f;
+
+        [Tooltip("Как быстро переключаемся между обычным и атакующим режимом поворота")]
+        public float RotationModeBlendSpeed = 10f;
+        
         [Inject] private readonly CharacterInputHandler _input;
         [Inject] private readonly AnimatorID _animatorID;
 
@@ -87,6 +95,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private float _rotationSlowdownCurrent = 1f;
         private bool _isOnAttack;
 
         // timeout deltatime
@@ -169,66 +178,54 @@ namespace StarterAssets
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
-
+        
         private void Move()
         {
-            // set target speed based on Move speed, Sprint speed and if Sprint is pressed
-            float targetSpeed = _input.Sprint ? SprintSpeed : MoveSpeed;
-
-            // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
-
-            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is no input, set the target speed to 0
+            var targetSpeed = _input.Sprint ? SprintSpeed : MoveSpeed;
+            
             if (_input.Move == Vector2.zero || _isOnAttack) targetSpeed = 0.0f;
 
-            // a reference to the players current horizontal velocity
-            float currentHorizontalSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
+            var currentHorizontalSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
 
-            float speedOffset = 0.1f;
-            float inputMagnitude = _input.AnalogMovement ? _input.Move.magnitude : 1f;
+            var speedOffset = 0.1f;
+            var inputMagnitude = _input.AnalogMovement ? _input.Move.magnitude : 1f;
 
-            // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
                 currentHorizontalSpeed > targetSpeed + speedOffset)
             {
-                // creates curved result rather than a linear one giving a more organic speed change
-                // note T in Lerp is clamped, so we don't need to clamp our speed
                 _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
                     Time.deltaTime * SpeedChangeRate);
-
-                // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
             }
             else
             {
                 _speed = targetSpeed;
             }
-
+            
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-            // normalise input direction
-            Vector3 inputDirection = new Vector3(_input.Move.x, 0.0f, _input.Move.y).normalized;
+            var inputDirection = new Vector3(_input.Move.x, 0.0f, _input.Move.y).normalized;
 
-            // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is a Move input rotate player when the player is moving
-            if (_input.Move != Vector2.zero && !_isOnAttack)
+            var targetSlowdown = _isOnAttack ? AttackRotationSlowdown : 1f;
+            _rotationSlowdownCurrent = Mathf.Lerp(_rotationSlowdownCurrent, targetSlowdown,
+                Time.deltaTime * RotationModeBlendSpeed);
+
+            if (_input.Move != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
+                var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                    RotationSmoothTime * _rotationSlowdownCurrent);
 
-                // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
 
+            var moveYaw = _isOnAttack ? transform.eulerAngles.y : _targetRotation;
+            var targetDirection = Quaternion.Euler(0.0f, moveYaw, 0.0f) * Vector3.forward;
 
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-            // Move the player
             controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                            new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             animator.SetFloat(_animatorID.AnimIDSpeed, _animationBlend);
             animator.SetFloat(_animatorID.AnimIDMotionSpeed, inputMagnitude);
