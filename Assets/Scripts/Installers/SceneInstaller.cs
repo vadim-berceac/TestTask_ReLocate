@@ -1,3 +1,4 @@
+using ReLocate.Debug;
 using StarterAssets;
 using Zenject;
 
@@ -8,6 +9,12 @@ public class SceneInstaller : MonoInstaller
         Container
             .Bind<StarterAssetsInputs>()
             .FromComponentInNewPrefabResource("Input/PlayerInput")
+            .AsSingle()
+            .NonLazy();
+        
+        Container
+            .Bind<FPSMonitor>()
+            .FromComponentInNewPrefabResource("Utility/FPSMonitor")
             .AsSingle()
             .NonLazy();
         
