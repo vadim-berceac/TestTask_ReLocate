@@ -129,7 +129,7 @@ public class WearableItemInstance : IDisposable
         propBoneSettings.SetPropBone(instance.transform, _propBones);
     }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
         if (_disposed)
         {

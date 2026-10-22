@@ -48,7 +48,7 @@ MonoBehaviour:
     m_Value: 0.15
   m_SampleCount:
     m_OverrideState: 0
-    m_Value: 8
+    m_Value: 6
 --- !u!114 &-762528321902640306
 MonoBehaviour:
   m_ObjectHideFlags: 3

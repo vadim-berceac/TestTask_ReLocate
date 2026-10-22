@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponDamagePoints : MonoBehaviour
@@ -6,10 +8,35 @@ public class WeaponDamagePoints : MonoBehaviour
     [field: SerializeField] public LayerMask DamageableLayer { get; private set; } = Physics.DefaultRaycastLayers;
 
     private static readonly Collider[] OverlapResults = new Collider[64];
+    private static readonly float[] OverlapKeys = new float[64];
+    private static readonly RaycastHit[] CastResults = new RaycastHit[32];
+    private static readonly IComparer<RaycastHit> DistanceComparer = new HitDistanceComparer();
+
+    private sealed class HitDistanceComparer : IComparer<RaycastHit>
+    {
+        public int Compare(RaycastHit a, RaycastHit b) => a.distance.CompareTo(b.distance);
+    }
 
     private Vector3[] _previousPos;
     private bool _inAttack;
     private bool _hasDealtDamageThisAttack;
+    private bool _hasHitColliderThisAttack;
+
+    private bool _hasDamageCandidate;
+    private bool _hasObstacleCandidate;
+    private HitData _damageCandidate;
+    private HitData _obstacleCandidate;
+
+    public bool HasHitColliderThisAttack => _hasHitColliderThisAttack;
+    public bool HasDealtDamageThisAttack => _hasDealtDamageThisAttack;
+
+    public event Action<HitData> OnHitStop;
+    public event Action<HitData> OnDamageDealt;
+
+    public void SetDamageableLayer(LayerMask layer)
+    {
+        DamageableLayer = layer;
+    }
 
     public void BeginAttack()
     {
@@ -18,13 +45,14 @@ public class WeaponDamagePoints : MonoBehaviour
 
         _inAttack = true;
         _hasDealtDamageThisAttack = false;
+        _hasHitColliderThisAttack = false;
 
         _previousPos = new Vector3[AttackPoints.Length];
 
         for (var i = 0; i < AttackPoints.Length; ++i)
         {
             var point = AttackPoints[i];
-            if (point == null || point.AttackRoot == null)
+            if (point == null || !point.AttackRoot)
                 continue;
 
             var worldPos = point.AttackRoot.position + point.AttackRoot.TransformVector(point.Offset);
@@ -41,6 +69,7 @@ public class WeaponDamagePoints : MonoBehaviour
     {
         _inAttack = false;
         _hasDealtDamageThisAttack = false;
+        _hasHitColliderThisAttack = false;
 
 #if UNITY_EDITOR
         if (AttackPoints == null)
@@ -56,95 +85,152 @@ public class WeaponDamagePoints : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_inAttack || AttackPoints == null || _hasDealtDamageThisAttack)
+        if (!_inAttack || AttackPoints == null)
             return;
+
+        _hasDamageCandidate = false;
+        _hasObstacleCandidate = false;
 
         for (var i = 0; i < AttackPoints.Length; ++i)
         {
             var point = AttackPoints[i];
-            if (point == null || point.AttackRoot == null)
+            if (point == null || !point.AttackRoot)
                 continue;
 
             var currentPos = point.AttackRoot.position + point.AttackRoot.TransformVector(point.Offset);
             var previousPos = _previousPos[i];
 
-            SweepAndApplyDamage(point, previousPos, currentPos);
+            CollectContacts(point, previousPos, currentPos);
 
             _previousPos[i] = currentPos;
 
 #if UNITY_EDITOR
             point.PreviousPositions.Add(currentPos);
 #endif
+        }
 
-            if (_hasDealtDamageThisAttack)
-                break;
+        ResolveContacts();
+    }
+
+    private void ResolveContacts()
+    {
+        if (_hasDamageCandidate)
+        {
+            var data = _damageCandidate;
+            _hasHitColliderThisAttack = true;
+            _hasDealtDamageThisAttack = true;
+            _inAttack = false;
+            data.Damageable.TakeDamage(data.Damage);
+            OnDamageDealt?.Invoke(data);
+            return;
+        }
+
+        if (_hasObstacleCandidate)
+        {
+            var data = _obstacleCandidate;
+            _hasHitColliderThisAttack = true;
+            _inAttack = false;
+            OnHitStop?.Invoke(data);
         }
     }
 
-    private void SweepAndApplyDamage(AttackPoint point, Vector3 start, Vector3 end)
+    private void CollectContacts(AttackPoint point, Vector3 start, Vector3 end)
     {
-        var direction = end - start;
-        var distance = direction.magnitude;
+        var delta = end - start;
+        var distance = delta.magnitude;
+        var dir = distance > 1e-4f ? delta / distance : Vector3.zero;
 
-        CheckOverlap(point, start, point.Damage);
-        if (_hasDealtDamageThisAttack)
-            return;
+        CollectStartOverlap(point, start, dir);
 
         if (distance < 1e-4f)
             return;
 
-        direction /= distance;
+        var count = Physics.SphereCastNonAlloc(start, point.Radius, dir, CastResults,
+            distance, DamageableLayer, QueryTriggerInteraction.Ignore);
+        if (count == 0)
+            return;
 
-        var sampleCount = Mathf.CeilToInt(distance / (point.Radius * 2f));
-        sampleCount = Mathf.Clamp(sampleCount, 1, 8);
+        Array.Sort(CastResults, 0, count, DistanceComparer);
 
-        for (var i = 1; i <= sampleCount; i++)
+        for (var i = 0; i < count; i++)
         {
-            var t = i / (float)(sampleCount + 1);
-            var samplePos = start + distance * t * direction;
-
-            CheckOverlap(point, samplePos, point.Damage);
-            if (_hasDealtDamageThisAttack)
-                return;
-        }
-
-        CheckOverlap(point, end, point.Damage);
-    }
-
-    private void CheckOverlap(AttackPoint point, Vector3 position, float damage)
-    {
-        var hitCount = Physics.OverlapSphereNonAlloc(position, point.Radius, OverlapResults, DamageableLayer);
-        ApplyDamageToHits(OverlapResults, hitCount, damage);
-    }
-
-    private void ApplyDamageToHits(Collider[] hits, int count, float damage)
-    {
-        for (var i = 0; i < count; ++i)
-        {
-            var col = hits[i];
-            if (col == null)
+            var hit = CastResults[i];
+            if (hit.distance <= 0f)
                 continue;
 
-            if (TryApplyDamage(col, damage))
-                return;
+            var center = start + dir * hit.distance;
+            RegisterContact(point, hit.collider, hit.point, hit.normal, center, dir);
         }
     }
 
-    private bool TryApplyDamage(Collider collider, float damage)
+    private void CollectStartOverlap(AttackPoint point, Vector3 position, Vector3 dir)
     {
-        if (_hasDealtDamageThisAttack)
-            return false;
+        var count = Physics.OverlapSphereNonAlloc(position, point.Radius, OverlapResults,
+            DamageableLayer, QueryTriggerInteraction.Ignore);
+        if (count == 0)
+            return;
 
-        if (collider.transform.root == transform.root)
-            return false;
+        for (var i = 0; i < count; i++)
+        {
+            var closest = GetClosestPoint(OverlapResults[i], position);
+            OverlapKeys[i] = (closest - position).sqrMagnitude;
+        }
 
-        var damageable = collider.GetComponentInParent<IDamageable>();
-        if (damageable == null)
-            return false;
+        Array.Sort(OverlapKeys, OverlapResults, 0, count);
 
-        damageable.TakeDamage(damage);
-        _hasDealtDamageThisAttack = true;
-        return true;
+        for (var i = 0; i < count; i++)
+        {
+            var col = OverlapResults[i];
+            if (!col)
+                continue;
+
+            var closest = GetClosestPoint(col, position);
+            var normal = position - closest;
+            normal = normal.sqrMagnitude > 1e-8f ? normal.normalized : -dir;
+
+            RegisterContact(point, col, closest, normal, position, dir);
+        }
+    }
+
+    private void RegisterContact(AttackPoint point, Collider col, Vector3 contactPoint,
+        Vector3 normal, Vector3 attackPointPos, Vector3 dir)
+    {
+        if (col.transform.root == transform.root)
+            return;
+
+        var damageable = col.GetComponentInParent<IDamageable>();
+        var data = new HitData(point, col, damageable, contactPoint, normal, attackPointPos, dir, point.Damage);
+
+        if (damageable != null)
+        {
+            if (_hasDamageCandidate)
+                return;
+
+            _hasDamageCandidate = true;
+            _damageCandidate = data;
+            return;
+        }
+
+        if (_hasObstacleCandidate)
+            return;
+
+        _hasObstacleCandidate = true;
+        _obstacleCandidate = data;
+    }
+
+    private static Vector3 GetClosestPoint(Collider col, Vector3 position)
+    {
+        if (col is MeshCollider { convex: false })
+        {
+            var toCenter = col.bounds.center - position;
+            var ray = new Ray(position, toCenter);
+            if (col.Raycast(ray, out var rayHit, toCenter.magnitude + col.bounds.extents.magnitude))
+                return rayHit.point;
+
+            return col.bounds.ClosestPoint(position);
+        }
+
+        return col.ClosestPoint(position);
     }
 
 #if UNITY_EDITOR

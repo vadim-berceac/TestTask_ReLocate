@@ -21,7 +21,10 @@ public class WeaponInstance : WearableItemInstance
             if (!_weaponDamagePoints)
             {
                 Debug.LogWarning("No damage points script on weapon instance!");
+                return;
             }
+            _weaponDamagePoints.OnHitStop += OnHitStop;
+            _weaponDamagePoints.OnDamageDealt +=  OnOnDamage;
         }
     }
 
@@ -33,6 +36,14 @@ public class WeaponInstance : WearableItemInstance
     public void EndAttack()
     {
         _weaponDamagePoints?.EndAttack();
+    }
+
+    public bool HasDealtDamageThisAttack => _weaponDamagePoints?.HasDealtDamageThisAttack ?? false;
+    public bool HasHitColliderThisAttack => _weaponDamagePoints?.HasHitColliderThisAttack ?? false;
+
+    public void SetDamageableLayer(LayerMask layer)
+    {
+        _weaponDamagePoints?.SetDamageableLayer(layer);
     }
 
     public void PlaySwitchPositionSound()
@@ -58,5 +69,23 @@ public class WeaponInstance : WearableItemInstance
     {
         _weaponAudioSource.clip = clip;
         _weaponAudioSource.Play();
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        
+        _weaponDamagePoints.OnHitStop -= OnHitStop;
+        _weaponDamagePoints.OnDamageDealt -=  OnOnDamage;
+    }
+
+    private void OnOnDamage(HitData hitData)
+    {
+        Debug.Log("VFX и звук попадения");
+    }
+
+    private void OnHitStop(HitData hitData)
+    {
+        Debug.Log("VFX и звук хитстопа");
     }
 }

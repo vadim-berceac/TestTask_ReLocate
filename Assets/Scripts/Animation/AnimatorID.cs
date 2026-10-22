@@ -8,6 +8,7 @@ public class AnimatorID
     public readonly int AnimIDFreeFall;
     public readonly int AnimIDMotionSpeed;
     public readonly int AnimIDAttack;
+    public readonly int AnimIDHitStopTrigger;
     public readonly string AttackStaticTag = "AttackStaticTag";
     
     private AnimatorID()
@@ -18,5 +19,6 @@ public class AnimatorID
         AnimIDFreeFall = Animator.StringToHash("FreeFall");
         AnimIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         AnimIDAttack = Animator.StringToHash("Attack");
+        AnimIDHitStopTrigger = Animator.StringToHash("HitStopTrigger");
     }
 }

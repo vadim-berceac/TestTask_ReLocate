@@ -2157,7 +2157,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
-  m_Radius: 0.28
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
@@ -2199,6 +2199,8 @@ MonoBehaviour:
   BottomClamp: -5
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  AttackRotationSlowdown: 6
+  RotationModeBlendSpeed: 10
 --- !u!114 &1272360919948154804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2214,6 +2216,9 @@ MonoBehaviour:
   animator: {fileID: 4035438733330461314}
   propBones: {fileID: 7256697067738952354}
   weaponData: {fileID: 11400000, guid: 5a20fc4581bd4ae48bc425b8050e203e, type: 2}
+  damageableLayer:
+    serializedVersion: 2
+    m_Bits: 4915
 --- !u!114 &669718052072708274
 MonoBehaviour:
   m_ObjectHideFlags: 0
