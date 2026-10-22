@@ -4,9 +4,9 @@ using UnityEngine;
 public class WearableItemInstance : IDisposable
 {
     private readonly PropBones _propBones;
-    private readonly WearableItemData _data;
+    protected readonly WearableItemData Data;
 
-    private readonly GameObject[] _instances;
+    protected readonly GameObject[] Instances;
     private bool _disposed;
     
     public int CurrentPositionIndex { get; protected set; }
@@ -14,12 +14,12 @@ public class WearableItemInstance : IDisposable
     public WearableItemInstance(PropBones propBones, WearableItemData data, int startPositionIndex = 0)
     {
         _propBones = propBones ?? throw new ArgumentNullException(nameof(propBones));
-        _data = data ?? throw new ArgumentNullException(nameof(data));
+        Data = data ?? throw new ArgumentNullException(nameof(data));
 
         CurrentPositionIndex = startPositionIndex;
 
-        var elements = _data.WearableElements;
-        _instances = new GameObject[elements?.Length ?? 0];
+        var elements = Data.WearableElements;
+        Instances = new GameObject[elements?.Length ?? 0];
 
         if (elements == null)
         {
@@ -36,7 +36,7 @@ public class WearableItemInstance : IDisposable
 
             var instance = UnityEngine.Object.Instantiate(settings.Prefab);
             instance.name = settings.Prefab.name;
-            _instances[i] = instance;
+            Instances[i] = instance;
 
             ApplyPosition(instance, settings, CurrentPositionIndex);
         }
@@ -50,7 +50,7 @@ public class WearableItemInstance : IDisposable
             return;
         }
 
-        var elements = _data.WearableElements;
+        var elements = Data.WearableElements;
         if (elements == null)
         {
             return;
@@ -60,7 +60,7 @@ public class WearableItemInstance : IDisposable
 
         for (var i = 0; i < elements.Length; i++)
         {
-            var instance = _instances[i];
+            var instance = Instances[i];
             if (instance == null)
             {
                 continue;
@@ -83,7 +83,7 @@ public class WearableItemInstance : IDisposable
 
     private int GetMaxPositionsCount()
     {
-        var elements = _data.WearableElements;
+        var elements = Data.WearableElements;
         if (elements == null)
         {
             return 0;
@@ -136,9 +136,9 @@ public class WearableItemInstance : IDisposable
             return;
         }
 
-        for (var i = 0; i < _instances.Length; i++)
+        for (var i = 0; i < Instances.Length; i++)
         {
-            var instance = _instances[i];
+            var instance = Instances[i];
             if (!instance)
             {
                 continue;
@@ -153,7 +153,7 @@ public class WearableItemInstance : IDisposable
                 UnityEngine.Object.DestroyImmediate(instance);
             }
 
-            _instances[i] = null;
+            Instances[i] = null;
         }
 
         _disposed = true;

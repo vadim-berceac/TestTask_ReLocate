@@ -30,3 +30,8 @@ MonoBehaviour:
       <Position>k__BackingField: {x: 0, y: 0.13, z: 0}
       <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
       <Scale>k__BackingField: 1
+  <SwitchPositionSound>k__BackingField: {fileID: 8300000, guid: 76c1b2b05ddadfa4481ae6e12ad25b9c, type: 3}
+  <SwingSounds>k__BackingField:
+  - {fileID: 8300000, guid: cb61b508b1869914a8c086e58f26aa16, type: 3}
+  - {fileID: 8300000, guid: f1f285223e2dabb48a6a3ae229cb944b, type: 3}
+  - {fileID: 8300000, guid: d0a44a71f25f1ac4eaebdded9c541dd8, type: 3}

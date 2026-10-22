@@ -11,6 +11,7 @@ public class AttackController : MonoBehaviour
    [Inject] private readonly AnimatorID _animatorID;
    
    private WeaponInstance _weapon;
+   private int _currentWeaponPosition;
 
    private void Awake()
    {
@@ -26,5 +27,10 @@ public class AttackController : MonoBehaviour
    public void SwitchWeaponPosition(int positionIndex)
    {
       _weapon?.SwitchPosition(positionIndex);
+   }
+
+   public void ShowTrail(float duration)
+   {
+      _weapon?.PlayRandomSwingSound();
    }
 }
