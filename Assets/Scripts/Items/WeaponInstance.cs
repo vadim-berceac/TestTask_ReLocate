@@ -1,3 +1,4 @@
+using Tiny;
 using UnityEngine;
 
 public class WeaponInstance : WearableItemInstance
@@ -5,6 +6,7 @@ public class WeaponInstance : WearableItemInstance
     private readonly AudioSource _weaponAudioSource;
     private readonly WeaponData _weaponData;
     private readonly WeaponDamagePoints _weaponDamagePoints;
+    private readonly Trail _trail;
     
     public WeaponInstance(PropBones propBones, WeaponData data)
         : base(propBones, data)
@@ -17,6 +19,12 @@ public class WeaponInstance : WearableItemInstance
             _weaponAudioSource.playOnAwake = false;
 
             Instances[0].TryGetComponent(out _weaponDamagePoints);
+            Instances[0].TryGetComponent(out _trail);
+
+            if (_trail)
+            {
+                _trail.enabled = false;
+            }
 
             if (!_weaponDamagePoints)
             {
@@ -44,6 +52,11 @@ public class WeaponInstance : WearableItemInstance
     public void EndAttack()
     {
         _weaponDamagePoints?.EndAttack();
+    }
+
+    public void ShowTrail(bool show)
+    {
+        _trail.enabled = show;
     }
 
     public bool HasDealtDamageThisAttack => _weaponDamagePoints?.HasDealtDamageThisAttack ?? false;

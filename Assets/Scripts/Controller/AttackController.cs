@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +16,7 @@ public class AttackController : MonoBehaviour
    
    private WeaponInstance _weapon;
    private int _currentWeaponPosition;
+   private CancellationTokenSource _trailCts;
 
    private void Awake()
    {
@@ -33,7 +37,7 @@ public class AttackController : MonoBehaviour
 
    public void ShowTrail(float duration)
    {
-      _weapon?.PlayRandomSwingSound();
+      _ = ShowTrailAsync(duration);
    }
 
    public void BeginAttack()
@@ -51,5 +55,49 @@ public class AttackController : MonoBehaviour
       {
          animator.SetTrigger(_animatorID.AnimIDHitStopTrigger);
       }
+   }
+   
+   private async Task ShowTrailAsync(float duration)
+   {
+      _trailCts?.Cancel();
+      _trailCts?.Dispose();
+      _trailCts = new CancellationTokenSource();
+
+      var token = _trailCts.Token;
+
+      try
+      {
+         _weapon?.PlayRandomSwingSound();
+         _weapon?.ShowTrail(true);
+
+         await Task.Delay(TimeSpan.FromSeconds(duration), token);
+
+         if (!token.IsCancellationRequested)
+            _weapon?.ShowTrail(false);
+      }
+      catch (OperationCanceledException)
+      {
+         
+      }
+      catch (Exception ex)
+      {
+         Debug.LogException(ex);
+         _weapon?.ShowTrail(false);
+      }
+      finally
+      {
+         if (_trailCts?.Token == token)
+         {
+            _trailCts.Dispose();
+            _trailCts = null;
+         }
+      }
+   }
+   
+   private void OnDestroy()
+   {
+      _trailCts?.Cancel();
+      _trailCts?.Dispose();
+      _trailCts = null;
    }
 }
