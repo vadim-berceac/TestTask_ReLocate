@@ -9,10 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5136305427173553333}
-  - component: {fileID: 7219491194264039960}
   - component: {fileID: 7242263661234225876}
   - component: {fileID: 2522945135939682481}
+  - component: {fileID: 5698999721545280821}
   - component: {fileID: 1051527752771364175}
+  - component: {fileID: 2850743194747845306}
+  - component: {fileID: 3058952463596219714}
   m_Layer: 12
   m_Name: Top
   m_TagString: Untagged
@@ -37,27 +39,6 @@ Transform:
   - {fileID: 7233804917444437435}
   m_Father: {fileID: 6336806530607350159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7219491194264039960
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2259927863006440567}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.19830322, y: 1.0270364, z: 0.6604534}
-  m_Center: {x: 0.019575119, y: -0.20200622, z: 0.0019333661}
 --- !u!114 &7242263661234225876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +98,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5698999721545280821}
+        m_TargetAssemblyTypeName: HitDecalSpawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2522945135939682481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +124,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HitVfxSpawner
   vfxPrefab: {fileID: 6849722964038910085, guid: ff56399135221014ab982ffb51c24324, type: 3}
   surfaceOffset: 0.01
+--- !u!114 &5698999721545280821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259927863006440567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780c5dd62cb043c428ccf98793a2df51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitDecalSpawner
+  decalPrefab: {fileID: 7351104978610120258, guid: dd749e5334993a441a3b168050a8c077, type: 3}
+  parent: {fileID: 8168362793135707479}
+  lifetime: 8
 --- !u!114 &1051527752771364175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +160,69 @@ MonoBehaviour:
   maxVelocity: 400
   restAngle: 0.05
   restVelocity: 0.5
+--- !u!114 &2850743194747845306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259927863006440567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e3bda482a2d2df48944b0fdc8b4a329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitFlash
+  damageable: {fileID: 7242263661234225876}
+  renderers:
+  - {fileID: 6281644122669234279}
+  flashColor: {r: 0.7490195, g: 0.7490195, b: 0.7490195, a: 0.5019608}
+  intensity: 30
+  duration: 0.08
+  falloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!65 &3058952463596219714
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259927863006440567}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.25, y: 1, z: 0.7}
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!1 &3596601199661424197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4463,7 +4534,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 23
+  m_VersionIndex: 101
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5734,7 +5805,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 23
+  m_VersionIndex: 101
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5775,7 +5846,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -31.28, y: 3.499, z: 0.973}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5136305427173553333}
   - {fileID: 1079201967211602618}
