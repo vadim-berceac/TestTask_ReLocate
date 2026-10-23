@@ -35940,6 +35940,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1663183626}
+    - target: {fileID: 2522945135939682481, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
+      propertyPath: vfxPrefab
+      value: 
+      objectReference: {fileID: 2110266215597647122, guid: efb02b92dbed77746a52dffa18c260fa, type: 3}
     - target: {fileID: 6336806530607350159, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31.28
@@ -35990,7 +35994,7 @@ PrefabInstance:
       objectReference: {fileID: 1663183626}
     - target: {fileID: 7403800415185912173, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
       propertyPath: m_VersionIndex
-      value: 95
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 7686307796790142698, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
       propertyPath: m_Mesh
@@ -35998,23 +36002,7 @@ PrefabInstance:
       objectReference: {fileID: 1242041185}
     - target: {fileID: 7686307796790142698, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
       propertyPath: m_VersionIndex
-      value: 95
-      objectReference: {fileID: 0}
-    - target: {fileID: 8168362793135707479, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8168362793135707479, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8168362793135707479, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8168362793135707479, guid: a5ece14d2fb87724d94ddb1c21fdb465, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 104
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

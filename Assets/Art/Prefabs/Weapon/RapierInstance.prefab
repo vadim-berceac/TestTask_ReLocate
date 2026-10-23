@@ -80,13 +80,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDamagePoints
   <AttackPoints>k__BackingField:
-  - <Radius>k__BackingField: 0.2
+  - <Radius>k__BackingField: 0.12
     <Damage>k__BackingField: 25
     <Offset>k__BackingField: {x: 0, y: 1.1, z: 0}
     <AttackRoot>k__BackingField: {fileID: 2620738215398092910}
-  - <Radius>k__BackingField: 0.3
+  - <Radius>k__BackingField: 0.18
+    <Damage>k__BackingField: 10
+    <Offset>k__BackingField: {x: 0, y: 0.37, z: 0}
+    <AttackRoot>k__BackingField: {fileID: 5075937451816618456}
+  - <Radius>k__BackingField: 0.18
     <Damage>k__BackingField: 10
     <Offset>k__BackingField: {x: 0, y: 0.6, z: 0}
+    <AttackRoot>k__BackingField: {fileID: 5075937451816618456}
+  - <Radius>k__BackingField: 0.18
+    <Damage>k__BackingField: 10
+    <Offset>k__BackingField: {x: 0, y: 0.84, z: 0}
     <AttackRoot>k__BackingField: {fileID: 5075937451816618456}
   <DamageableLayer>k__BackingField:
     serializedVersion: 2
