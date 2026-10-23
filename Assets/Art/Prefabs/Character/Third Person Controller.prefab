@@ -2199,7 +2199,7 @@ MonoBehaviour:
   BottomClamp: -5
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  AttackRotationSlowdown: 6
+  AttackRotationSlowdown: 20
   RotationModeBlendSpeed: 10
 --- !u!114 &1272360919948154804
 MonoBehaviour:
@@ -2218,7 +2218,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 5a20fc4581bd4ae48bc425b8050e203e, type: 2}
   damageableLayer:
     serializedVersion: 2
-    m_Bits: 4915
+    m_Bits: 4097
 --- !u!114 &669718052072708274
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,4 +35,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cb61b508b1869914a8c086e58f26aa16, type: 3}
   - {fileID: 8300000, guid: f1f285223e2dabb48a6a3ae229cb944b, type: 3}
   - {fileID: 8300000, guid: d0a44a71f25f1ac4eaebdded9c541dd8, type: 3}
-  <HitStopVFX>k__BackingField: {fileID: 0}
+  <HitStopVFX>k__BackingField: {fileID: 4239035993469730988, guid: 926add2a9aa8e4849ba13224214d26a9, type: 3}

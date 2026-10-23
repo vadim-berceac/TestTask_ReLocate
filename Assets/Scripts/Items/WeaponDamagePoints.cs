@@ -120,7 +120,12 @@ public class WeaponDamagePoints : MonoBehaviour
             _hasHitColliderThisAttack = true;
             _hasDealtDamageThisAttack = true;
             _inAttack = false;
-            data.Damageable.TakeDamage(data.Damage);
+
+            if (data.Damageable is IHitDamageable hitDamageable)
+                hitDamageable.TakeDamage(data.Damage, data);
+            else
+                data.Damageable.TakeDamage(data.Damage);
+
             OnDamageDealt?.Invoke(data);
             return;
         }
