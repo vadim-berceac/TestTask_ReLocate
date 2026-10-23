@@ -4,6 +4,9 @@ using UnityEngine;
 public class WeaponData : WearableItemData
 {
    [field: Header("Sounds")]
-   [field: SerializeField] public AudioClip SwitchPositionSound { get; set; }
+   [field: SerializeField] public AudioClip HitStopSound { get; set; }
    [field: SerializeField] public AudioClip[] SwingSounds { get; set; }
+   
+   [field: Header("VFX")]
+   [field: SerializeField] public ParticleSystem HitStopVFX { get; set; }
 }

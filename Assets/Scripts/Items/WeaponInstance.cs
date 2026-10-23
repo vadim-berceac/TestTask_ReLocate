@@ -27,6 +27,14 @@ public class WeaponInstance : WearableItemInstance
             _weaponDamagePoints.OnDamageDealt +=  OnOnDamage;
         }
     }
+    
+    public override void Dispose()
+    {
+        base.Dispose();
+        
+        _weaponDamagePoints.OnHitStop -= OnHitStop;
+        _weaponDamagePoints.OnDamageDealt -=  OnOnDamage;
+    }
 
     public void BeginAttack()
     {
@@ -46,13 +54,12 @@ public class WeaponInstance : WearableItemInstance
         _weaponDamagePoints?.SetDamageableLayer(layer);
     }
 
-    public void PlaySwitchPositionSound()
+    private void PlayHitStopSound()
     {
-        if (!_weaponData.SwitchPositionSound)
+        if (_weaponData.HitStopSound)
         {
-            return;
+            PlayAudio(_weaponData.HitStopSound);
         }
-        PlayAudio(_weaponData.SwitchPositionSound);
     }
 
     public void PlayRandomSwingSound()
@@ -71,14 +78,6 @@ public class WeaponInstance : WearableItemInstance
         _weaponAudioSource.Play();
     }
 
-    public override void Dispose()
-    {
-        base.Dispose();
-        
-        _weaponDamagePoints.OnHitStop -= OnHitStop;
-        _weaponDamagePoints.OnDamageDealt -=  OnOnDamage;
-    }
-
     private void OnOnDamage(HitData hitData)
     {
         Debug.Log("VFX и звук попадения");
@@ -86,6 +85,12 @@ public class WeaponInstance : WearableItemInstance
 
     private void OnHitStop(HitData hitData)
     {
-        Debug.Log("VFX и звук хитстопа");
+        PlayHitStopSound();
+        if (!_weaponData.HitStopVFX)
+        {
+            return;
+        }
+        
+        _weaponData.HitStopVFX.PlayAtHitData(hitData);
     }
 }
