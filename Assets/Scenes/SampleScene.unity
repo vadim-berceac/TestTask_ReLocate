@@ -13497,22 +13497,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Third Person Controller
       objectReference: {fileID: 0}
-    - target: {fileID: 2650234582257683269, guid: d151e1d928e74314ab45a89469800ae2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.32000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 2650234582257683269, guid: d151e1d928e74314ab45a89469800ae2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.2131083
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925331831405600874, guid: d151e1d928e74314ab45a89469800ae2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.32000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925331831405600874, guid: d151e1d928e74314ab45a89469800ae2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.2131083
-      objectReference: {fileID: 0}
     - target: {fileID: 8450154179592602258, guid: d151e1d928e74314ab45a89469800ae2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.08

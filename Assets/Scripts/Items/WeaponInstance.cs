@@ -93,7 +93,7 @@ public class WeaponInstance : WearableItemInstance
 
     private void OnOnDamage(HitData hitData)
     {
-        Debug.Log("VFX и звук попадения");
+       
     }
 
     private void OnHitStop(HitData hitData)
