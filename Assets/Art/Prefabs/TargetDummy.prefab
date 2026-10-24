@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259927863006440567}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 8168362793135707479}
   - {fileID: 7233804917444437435}
   m_Father: {fileID: 6336806530607350159}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &7242263661234225876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2840646ceb34b940a3cdb67566b46d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitVfxSpawner
-  vfxPrefab: {fileID: 6849722964038910085, guid: ff56399135221014ab982ffb51c24324, type: 3}
+  vfxPrefab: {fileID: 2110266215597647122, guid: efb02b92dbed77746a52dffa18c260fa, type: 3}
   surfaceOffset: 0.01
 --- !u!114 &5698999721545280821
 MonoBehaviour:
@@ -379,13 +379,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3679066555651261037}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.878, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6336806530607350159}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!23 &7969223831913801486
 MeshRenderer:
   m_ObjectHideFlags: 0
