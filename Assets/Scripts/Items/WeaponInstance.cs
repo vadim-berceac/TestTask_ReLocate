@@ -1,3 +1,4 @@
+using Cinemachine;
 using Tiny;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class WeaponInstance : WearableItemInstance
     private readonly WeaponData _weaponData;
     private readonly WeaponDamagePoints _weaponDamagePoints;
     private readonly Trail _trail;
+    private readonly CinemachineImpulseSource  _impulseSource;
     
     public WeaponInstance(PropBones propBones, WeaponData data)
         : base(propBones, data)
@@ -20,6 +22,7 @@ public class WeaponInstance : WearableItemInstance
 
             Instances[0].TryGetComponent(out _weaponDamagePoints);
             Instances[0].TryGetComponent(out _trail);
+            Instances[0].TryGetComponent(out _impulseSource);
 
             if (_trail)
             {
@@ -93,11 +96,12 @@ public class WeaponInstance : WearableItemInstance
 
     private void OnOnDamage(HitData hitData)
     {
-       
+        _impulseSource.GenerateImpulseWithForce(0.12f);
     }
 
     private void OnHitStop(HitData hitData)
     {
+        _impulseSource.GenerateImpulseWithForce(0.2f);
         PlayHitStopSound();
         if (!_weaponData.HitStopVFX)
         {

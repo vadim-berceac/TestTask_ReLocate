@@ -83,6 +83,7 @@ namespace StarterAssets
         
         [Inject] private readonly CharacterInputHandler _input;
         [Inject] private readonly AnimatorID _animatorID;
+        [Inject] private readonly CameraSystem _cameraSystem;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -102,24 +103,13 @@ namespace StarterAssets
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
         
-        private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
-
-        private void Awake()
-        {
-            // get a reference to our main camera
-            if (_mainCamera == null)
-            {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            }
-        }
 
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-         
-            controller = GetComponent<CharacterController>();
+            _cameraSystem.SetTarget(CinemachineCameraTarget.transform);
 
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
@@ -214,7 +204,7 @@ namespace StarterAssets
             if (_input.Move != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
+                                  _cameraSystem.MainCamera.transform.eulerAngles.y;
                 var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime * _rotationSlowdownCurrent);
 
