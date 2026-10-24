@@ -81,21 +81,21 @@ Material:
     - _CullMode: 0
     - _CullModeForward: 0
     - _DepthOffsetEnable: 0
-    - _DissolveAmount: 0.135
+    - _DissolveAmount: 0.226
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 1
     - _DstBlend2: 10
-    - _EdgeIntensity: 14
-    - _EdgeWidth: 0.047
-    - _EmissionIntensity: 20
+    - _EdgeIntensity: 2
+    - _EdgeWidth: 0.226
+    - _EmissionIntensity: 8
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 0
     - _ExcludeFromTUAndAA: 0
     - _MaterialID: 1
     - _MaterialTypeMask: 2
-    - _NoiseScale: 0.5
+    - _NoiseScale: 0.9
     - _OpaqueCullMode: 2
     - _PerPixelSorting: 0
     - _RayTracing: 0
@@ -125,7 +125,7 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _TriplanarBlend: 7.9
+    - _TriplanarBlend: 7.7
     - _UseShadowThreshold: 0
     - _UseTriplanar: 1
     - _ZTestDepthEqualForOpaque: 4
@@ -135,8 +135,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.02573854, g: 0.7689058, b: 0.909434, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
-    - _EdgeColor: {r: 1, g: 0, b: 0.9340496, a: 1}
+    - _EdgeColor: {r: 0.02745098, g: 0.76862746, b: 0.9098039, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GhostEmission: {r: 0.08113199, g: 0.9871504, b: 1, a: 1}
+    - _GhostEmission: {r: 0.27064556, g: 1, b: 0.25471687, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
