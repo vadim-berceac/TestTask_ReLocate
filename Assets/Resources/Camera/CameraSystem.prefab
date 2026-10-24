@@ -152,14 +152,14 @@ MonoBehaviour:
   SMAAQuality: 2
   dithering: 1
   stopNaNs: 0
-  taaSharpenStrength: 0.5
-  TAAQuality: 1
-  taaSharpenMode: 0
-  taaRingingReduction: 0
+  taaSharpenStrength: 0.14
+  TAAQuality: 2
+  taaSharpenMode: 1
+  taaRingingReduction: 0.05
   taaHistorySharpening: 0.35
   taaAntiFlicker: 0.5
-  taaMotionVectorRejection: 0
-  taaAntiHistoryRinging: 0
+  taaMotionVectorRejection: 0.1
+  taaAntiHistoryRinging: 1
   taaBaseBlendFactor: 0.875
   taaJitterScale: 1
   physicalParameters:

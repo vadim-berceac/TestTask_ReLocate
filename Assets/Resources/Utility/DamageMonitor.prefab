@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5010947288013070614}
   - component: {fileID: 1365281576380452787}
+  - component: {fileID: -1248353667458329345}
   m_Layer: 0
   m_Name: DamageMonitor
   m_TagString: Untagged
@@ -58,3 +59,20 @@ MonoBehaviour:
   showTotals: 1
   showTargets: 1
   showLog: 1
+--- !u!114 &-1248353667458329345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499577054163268032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80153b4b68fa3dc4599a0ecd07a73707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HintText
+  text: "F - \u0434\u0438\u043D\u0430\u043C\u0438\u0447\u0435\u0441\u043A\u0438\u0439
+    \u0441\u0432\u0435\u0442\n\u041B\u041A\u041C - \u0430\u0442\u0430\u043A\u0430"
+  position: {x: 10, y: 200}
+  fontSize: 20
+  color: {r: 1, g: 0.9892721, b: 0, a: 1}

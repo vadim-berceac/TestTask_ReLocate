@@ -11,6 +11,7 @@ namespace StarterAssets
         [field: SerializeField] public Vector2 Look { get; private set; }
         [field: SerializeField] public bool Jump { get; private set; }
         [field: SerializeField] public bool Sprint { get; private set; }
+        public bool LightSpot { get; private set; }
 
         [Header("Input Buffer")]
         [Tooltip("Сколько секунд нажатие атаки остаётся «живым», если его не успели потребить")]
@@ -28,6 +29,7 @@ namespace StarterAssets
         public Action<bool> JumpAction;
         public Action<bool> SprintAction;
         public Action<bool> AttackAction;
+        public Action LightSpotAction;
 
         private float _attackPressedTime = float.NegativeInfinity;
 
@@ -59,6 +61,11 @@ namespace StarterAssets
         private void OnAttack(InputValue value)
         {
             AttackInput(value.isPressed);
+        }
+
+        private void OnLightSpot(InputValue value)
+        {
+            LightSpotInput(value.isPressed);
         }
 
         private void MoveInput(Vector2 newMoveDirection)
@@ -95,9 +102,20 @@ namespace StarterAssets
             AttackAction?.Invoke(isPressed);
         }
 
+        private void LightSpotInput(bool isPressed)
+        {
+            LightSpot = isPressed;
+            LightSpotAction?.Invoke();
+        }
+
         public void ResetJump()
         {
             Jump = false;
+        }
+
+        public void ResetLightSpot()
+        {
+            LightSpot = false;
         }
 
         private void OnApplicationFocus(bool hasFocus)

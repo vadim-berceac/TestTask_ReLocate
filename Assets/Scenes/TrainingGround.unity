@@ -2327,7 +2327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &238936361
 Transform:
   m_ObjectHideFlags: 0
@@ -2541,7 +2541,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 3200
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 2.3304453e+23, y: 0, z: 0, w: NaN}
+  m_BoundingSphereOverride: {x: 1.285718e-39, y: 1.561226e-39, z: 1.561229e-39, w: 1.653066e-39}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -12626,7 +12626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1137711645
 Transform:
   m_ObjectHideFlags: 0
@@ -12840,7 +12840,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 3200
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 9.64e-43, y: 4.08e-43, z: 0, w: 1.7471577e+30}
+  m_BoundingSphereOverride: {x: 9.8914344e-26, y: -0.0013649937, z: 1.9984079e-14, w: -1.652345e-16}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -13143,33 +13143,33 @@ MonoBehaviour:
     m_Aspect: 0
   m_HasValidSHForNormalization: 1
   m_SHForNormalization:
-    'sh[ 0]': 10.053096
-    'sh[ 1]': 5.3687053
-    'sh[ 2]': -7.3205466
-    'sh[ 3]': 0.7922058
-    'sh[ 4]': 0.1815524
-    'sh[ 5]': -1.9688978
-    'sh[ 6]': 0.31435558
-    'sh[ 7]': -0.21471117
-    'sh[ 8]': -0.38399825
-    'sh[ 9]': 5.050419
-    'sh[10]': 2.7613106
-    'sh[11]': -3.6237364
-    'sh[12]': 0.39492565
-    'sh[13]': 0.090690404
-    'sh[14]': -0.98012394
-    'sh[15]': 0.15855
-    'sh[16]': -0.11097264
-    'sh[17]': -0.18401274
-    'sh[18]': 1.930582
-    'sh[19]': 1.1266438
-    'sh[20]': -1.384328
-    'sh[21]': 0.13816601
-    'sh[22]': 0.034433965
-    'sh[23]': -0.37084374
-    'sh[24]': 0.058480848
-    'sh[25]': -0.048669867
-    'sh[26]': -0.06825061
+    'sh[ 0]': 10.113756
+    'sh[ 1]': 5.3503437
+    'sh[ 2]': -7.3107314
+    'sh[ 3]': 0.7866244
+    'sh[ 4]': 0.18153527
+    'sh[ 5]': -1.969162
+    'sh[ 6]': 0.3158176
+    'sh[ 7]': -0.21595848
+    'sh[ 8]': -0.38230827
+    'sh[ 9]': 5.0687366
+    'sh[10]': 2.754948
+    'sh[11]': -3.6253965
+    'sh[12]': 0.3966901
+    'sh[13]': 0.09026503
+    'sh[14]': -0.9806237
+    'sh[15]': 0.15901779
+    'sh[16]': -0.11085333
+    'sh[17]': -0.18324792
+    'sh[18]': 1.9301884
+    'sh[19]': 1.1247345
+    'sh[20]': -1.3883476
+    'sh[21]': 0.13857254
+    'sh[22]': 0.03399963
+    'sh[23]': -0.37135345
+    'sh[24]': 0.058447875
+    'sh[25]': -0.048400488
+    'sh[26]': -0.067871146
   m_SHValidForCapturePosition: {x: 0, y: 2, z: 0}
   m_SHValidForSourcePosition: {x: 0, y: 2, z: 0}
   m_HDProbeVersion: 9
@@ -16048,7 +16048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1425361220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16247,7 +16247,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 3200
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 9.64e-43, y: 5.87e-43, z: 0, w: 1.08504054e+30}
+  m_BoundingSphereOverride: {x: 9.16e-43, y: 9.1e-44, z: 0, w: 4.3e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -16325,7 +16325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1450826320
 Transform:
   m_ObjectHideFlags: 0
@@ -16539,7 +16539,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 3200
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 6.169e-42, y: 0, z: 0, w: 1e-45}
+  m_BoundingSphereOverride: {x: 0, y: 2.47962e-39, z: 2.551e-41, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -16999,7 +16999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1491252271
 Transform:
   m_ObjectHideFlags: 0
@@ -17213,7 +17213,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 3200
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 7.071416e-39, y: 5.234936e-39, z: 2.0663299e-38, w: 5.234703e-39}
+  m_BoundingSphereOverride: {x: 9.16e-43, y: 9.7e-44, z: 0, w: 4.3e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -18389,7 +18389,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -18422,13 +18422,13 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 6500
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 2.1306155e-38, y: 2.0663308e-38, z: 2.1030648e-38, w: 2.0663075e-38}
+  m_BoundingSphereOverride: {x: 0, y: 1.285759e-39, z: 4.588e-42, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -24955,8 +24955,6 @@ SceneRoots:
   - {fileID: 66793188}
   - {fileID: 1144579465}
   - {fileID: 544506261}
-  - {fileID: 1597104873}
-  - {fileID: 373671861}
   - {fileID: 2061336459}
   - {fileID: 81254748}
   - {fileID: 1365198285}
@@ -24965,3 +24963,5 @@ SceneRoots:
   - {fileID: 198392367}
   - {fileID: 649948394}
   - {fileID: 1232191593}
+  - {fileID: 373671861}
+  - {fileID: 1597104873}
