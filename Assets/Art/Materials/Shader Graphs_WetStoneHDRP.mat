@@ -31,6 +31,7 @@ Material:
   - _DISABLE_DECALS
   - _DISABLE_SSR
   - _DISABLE_SSR_TRANSPARENT
+  - _MATERIAL_FEATURE_CLEAR_COAT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -91,6 +92,7 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
+    - _ClearCoatEnabled: 1
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -105,11 +107,11 @@ Material:
     - _ExcludeFromTUAndAA: 0
     - _MaterialID: 1
     - _MaterialTypeMask: 2
-    - _Moss_Amount: 1
-    - _Moss_Noise_Scale: 19.89
+    - _Moss_Amount: 0.574
+    - _Moss_Noise_Scale: 0.9
     - _Moss_Noise_Strength: 1
     - _Moss_Sharpness: 7
-    - _Moss_Softness: 0.97
+    - _Moss_Softness: 0.27
     - _OpaqueCullMode: 2
     - _PerPixelSorting: 0
     - _RayTracing: 0
@@ -140,10 +142,11 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
+    - _Water_Film: 0.034
     - _Wet_Amount: 1
-    - _Wet_Darkness: 0.933
-    - _Wet_Normal_Flatten: 0.579
-    - _Wet_Smoothness: 0.771
+    - _Wet_Darkness: 0.684
+    - _Wet_Normal_Flatten: 0.065
+    - _Wet_Smoothness: 0.435
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
