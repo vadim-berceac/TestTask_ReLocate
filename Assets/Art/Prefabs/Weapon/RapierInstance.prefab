@@ -99,7 +99,7 @@ MonoBehaviour:
     <AttackRoot>k__BackingField: {fileID: 5075937451816618456}
   <DamageableLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 4915
+    m_Bits: 4097
 --- !u!114 &6932082636621825101
 MonoBehaviour:
   m_ObjectHideFlags: 0

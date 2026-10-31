@@ -478,6 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2355930702395929610}
+  - component: {fileID: 383339680764743068}
   m_Layer: 0
   m_Name: PlayerCameraRoot
   m_TagString: CinemachineTarget
@@ -500,6 +501,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7281258351621265388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383339680764743068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2355930702395929613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ea0b8617f75f64a917723e8e7fa7f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraRoot
+  <Root>k__BackingField: {fileID: 2355930702395929610}
 --- !u!1 &2392292770969679023
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +691,55 @@ Transform:
   - {fileID: 9091551109886113024}
   m_Father: {fileID: 6496119901723350017}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3148507929694882034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7992591786173694667}
+  - component: {fileID: 4096529077372783673}
+  m_Layer: 0
+  m_Name: Installer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7992591786173694667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148507929694882034}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7281258351621265388}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4096529077372783673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148507929694882034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836a770c9a0bcb94599d0987a46cdd62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterInstaller
+  characterTransform: {fileID: 7281258351621265388}
+  characterController: {fileID: 7946576563041668444}
+  animator: {fileID: 3741388686798261654}
+  propBones: {fileID: 8023198593692716470}
+  cameraRoot: {fileID: 383339680764743068}
 --- !u!1 &3171765462624065745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,10 +2194,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7281258351621265388}
+  - component: {fileID: 2110775292864732975}
   - component: {fileID: 3741388686798261654}
   - component: {fileID: 7946576563041668444}
   - component: {fileID: 7946576563041668445}
   - component: {fileID: 1892781325733882016}
+  - component: {fileID: 541552258277529230}
+  - component: {fileID: 7804227917828856310}
   - component: {fileID: 4709833261204855380}
   m_Layer: 8
   m_Name: Player
@@ -2156,12 +2222,31 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7992591786173694667}
   - {fileID: 2355930702395929610}
   - {fileID: 2208865246165428981}
   - {fileID: 7012047884475521349}
   - {fileID: 9087671697711017263}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110775292864732975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946576563041668438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.GameObjectContext
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 4096529077372783673}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!95 &3741388686798261654
 Animator:
   serializedVersion: 7
@@ -2221,15 +2306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3741388686798261654}
-  controller: {fileID: 7946576563041668444}
   MoveSpeed: 2
   SprintSpeed: 5.335
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
-  LandingAudioClip: {fileID: 0}
-  FootstepAudioClips: []
-  FootstepAudioVolume: 0.3
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.3
@@ -2240,11 +2320,7 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 1
-  CinemachineCameraTarget: {fileID: 2355930702395929613}
-  TopClamp: 45
-  BottomClamp: -5
-  CameraAngleOverride: 0
-  LockCameraPosition: 0
+  CinemachineCameraTarget: {fileID: 2355930702395929610}
   AttackRotationSlowdown: 20
   RotationModeBlendSpeed: 10
 --- !u!114 &1892781325733882016
@@ -2259,12 +2335,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ee96569e61fe540ae6ab054aba7d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackController
-  animator: {fileID: 3741388686798261654}
-  propBones: {fileID: 8023198593692716470}
   weaponData: {fileID: 11400000, guid: 5a20fc4581bd4ae48bc425b8050e203e, type: 2}
-  damageableLayer:
-    serializedVersion: 2
-    m_Bits: 4097
+--- !u!114 &541552258277529230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946576563041668438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8ed8d5b59da0458765a2afe6fe40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetingController
+  originOffset: {x: 0, y: 1, z: 0.3}
+  capsuleLength: 2
+  capsuleRadius: 1.2
+  maxColliders: 16
+  maxTargetAngle: 75
+  rotationSpeed: 360
+  smoothing: 12
+  maxTotalTurn: 75
+  stopAngle: 0.5
+  yawOnly: 1
+--- !u!114 &7804227917828856310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946576563041668438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8513e8ecf1cbcf4ab150ac2cf38dc48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FootstepsController
+  <LandingAudioClip>k__BackingField: {fileID: 0}
+  <FootstepAudioClips>k__BackingField: []
+  <FootstepAudioVolume>k__BackingField: 0.5
 --- !u!114 &4709833261204855380
 MonoBehaviour:
   m_ObjectHideFlags: 0

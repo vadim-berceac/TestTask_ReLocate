@@ -6,13 +6,13 @@ using Zenject;
 
 public class AttackController : MonoBehaviour
 {
-   [SerializeField] private Animator animator;
-   [SerializeField] private PropBones propBones;
    [SerializeField] private WeaponData weaponData;
-   [SerializeField] private LayerMask damageableLayer = Physics.DefaultRaycastLayers;
    
+   [Inject] private readonly Animator _animator;
+   [Inject] private readonly PropBones _propBones;
    [Inject] private readonly CharacterInputHandler _characterInputHandler;
    [Inject] private readonly AnimatorID _animatorID;
+   [Inject] private readonly DamageMask _damageMask;
    
    private WeaponInstance _weapon;
    private int _currentWeaponPosition;
@@ -20,40 +20,49 @@ public class AttackController : MonoBehaviour
 
    private void Awake()
    {
-      _weapon = (WeaponInstance)WearableItemInstanceFactory.Create(propBones, weaponData);
+      _weapon = (WeaponInstance)WearableItemInstanceFactory.Create(_propBones, weaponData);
       _weapon?.SwitchPosition(0);
-      _weapon?.SetDamageableLayer(damageableLayer);
+      _weapon?.SetDamageMask(_damageMask.DamageableLayer);
    }
    
    private void Update()
    {
-      animator.SetBool(_animatorID.AnimIDAttack, _characterInputHandler.Attack);
+      _animator.SetBool(_animatorID.AnimIDAttack, _characterInputHandler.Attack);
    }
    
-   public void SwitchWeaponPosition(int positionIndex)
+   public void SwitchWeaponPosition(AnimationEvent animationEvent)
    {
-      _weapon?.SwitchPosition(positionIndex);
+      _weapon?.SwitchPosition(animationEvent.intParameter);
    }
 
-   public void ShowTrail(float duration)
+   public void ShowTrail(AnimationEvent animationEvent)
    {
-      _ = ShowTrailAsync(duration);
+     _ = ShowTrailAsync(animationEvent.floatParameter);
    }
 
-   public void BeginAttack()
+   public void BeginAttack(AnimationEvent animationEvent)
    {
+      if (animationEvent.animatorClipInfo.weight <= 0.5f)
+      {
+         return;
+      }
       _weapon?.BeginAttack();
    }
 
-   public void EndAttack()
+   public void EndAttack(AnimationEvent animationEvent)
    {
+      if (animationEvent.animatorClipInfo.weight <= 0.5f)
+      {
+         return;
+      }
+      
       var damageDealt = _weapon?.HasDealtDamageThisAttack ?? false;
       var hitCollider = _weapon?.HasHitColliderThisAttack ?? false;
       _weapon?.EndAttack();
 
       if (_weapon != null && hitCollider && !damageDealt)
       {
-         animator.SetTrigger(_animatorID.AnimIDHitStopTrigger);
+         _animator.SetTrigger(_animatorID.AnimIDHitStopTrigger);
       }
    }
    

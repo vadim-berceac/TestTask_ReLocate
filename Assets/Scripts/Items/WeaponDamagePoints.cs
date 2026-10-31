@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponDamagePoints : MonoBehaviour
 {
     [field: SerializeField] public AttackPoint[] AttackPoints { get; private set; }
-    [field: SerializeField] public LayerMask DamageableLayer { get; private set; } = Physics.DefaultRaycastLayers;
+    private LayerMask _damageableLayer = Physics.DefaultRaycastLayers;
 
     private static readonly Collider[] OverlapResults = new Collider[64];
     private static readonly float[] OverlapKeys = new float[64];
@@ -35,7 +35,7 @@ public class WeaponDamagePoints : MonoBehaviour
 
     public void SetDamageableLayer(LayerMask layer)
     {
-        DamageableLayer = layer;
+        _damageableLayer = layer;
     }
 
     public void BeginAttack()
@@ -151,7 +151,7 @@ public class WeaponDamagePoints : MonoBehaviour
             return;
 
         var count = Physics.SphereCastNonAlloc(start, point.Radius, dir, CastResults,
-            distance, DamageableLayer, QueryTriggerInteraction.Ignore);
+            distance, _damageableLayer, QueryTriggerInteraction.Ignore);
         if (count == 0)
             return;
 
@@ -171,7 +171,7 @@ public class WeaponDamagePoints : MonoBehaviour
     private void CollectStartOverlap(AttackPoint point, Vector3 position, Vector3 dir)
     {
         var count = Physics.OverlapSphereNonAlloc(position, point.Radius, OverlapResults,
-            DamageableLayer, QueryTriggerInteraction.Ignore);
+            _damageableLayer, QueryTriggerInteraction.Ignore);
         if (count == 0)
             return;
 

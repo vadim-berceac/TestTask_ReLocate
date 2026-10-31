@@ -38,6 +38,11 @@ public class WeaponInstance : WearableItemInstance
             _weaponDamagePoints.OnDamageDealt +=  OnOnDamage;
         }
     }
+
+    public void SetDamageMask(LayerMask layer)
+    {
+        _weaponDamagePoints.SetDamageableLayer(layer);
+    }
     
     public override void Dispose()
     {
@@ -64,11 +69,6 @@ public class WeaponInstance : WearableItemInstance
 
     public bool HasDealtDamageThisAttack => _weaponDamagePoints?.HasDealtDamageThisAttack ?? false;
     public bool HasHitColliderThisAttack => _weaponDamagePoints?.HasHitColliderThisAttack ?? false;
-
-    public void SetDamageableLayer(LayerMask layer)
-    {
-        _weaponDamagePoints?.SetDamageableLayer(layer);
-    }
 
     private void PlayHitStopSound()
     {

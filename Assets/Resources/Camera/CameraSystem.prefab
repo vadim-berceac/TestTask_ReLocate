@@ -419,6 +419,10 @@ MonoBehaviour:
   <MainCamera>k__BackingField: {fileID: 1263139834724511809}
   <VirtualCamera>k__BackingField: {fileID: 6636888057146048993}
   <ImpulseListener>k__BackingField: {fileID: 3581203169492392986}
+  <LockCameraPosition>k__BackingField: 0
+  <TopClamp>k__BackingField: 45
+  <BottomClamp>k__BackingField: -5
+  <CameraAngleOverride>k__BackingField: 0
 --- !u!1 &6627305399875296510
 GameObject:
   m_ObjectHideFlags: 0

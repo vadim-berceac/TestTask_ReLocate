@@ -31,6 +31,12 @@ public class SceneInstaller : MonoInstaller
             .NonLazy();
         
         Container
+            .Bind<DamageMask>()
+            .FromScriptableObjectResource("Data/DamageMask")
+            .AsSingle()
+            .NonLazy();
+        
+        Container
             .BindInterfacesAndSelfTo<CharacterInputHandler>()
             .AsSingle()
             .NonLazy();
